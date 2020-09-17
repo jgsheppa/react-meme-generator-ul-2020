@@ -19,6 +19,24 @@ export default function MemeTextForm() {
     margin: '8px',
   };
 
+  function extractMemeText(meme) {
+    const memeTextArray = [];
+    let re = /\/[a-z]+\/([a-z_~',!]+\/[a-z_~',!]+)\.jpg/;
+    //Takes information from URL needed to change the meme's text
+    for (let i = 0; i < meme.length; i++) {
+      memeTextArray.push(meme[i].match(re)[1]);
+    }
+    return memeTextArray;
+  }
+
+  const makeMeme = (urls, webText, myText) => {
+    const newUrls = [];
+    for (let i = 0; i < webText.length; i++) {
+      newUrls.push(urls[i].replace(webText[i], myText[i]));
+    }
+    return newUrls;
+  };
+
   return (
     <div>
       <form>
