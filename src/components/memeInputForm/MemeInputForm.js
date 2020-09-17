@@ -1,7 +1,38 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-export default function MemeTextForm() {
-  const [memeText, setMemeText] = useState('');
+export default function MemeTextForm(props) {
+  const [newMemeText, setNewMemeText] = useState('');
+  const { register, handleSubmit, errors } = useForm();
+
+  function extractMemeText(meme) {
+    let re = /\/[a-z]+\/([a-z_~',!]+\/[a-z_~',!]+)\.jpg/;
+    return meme.match(re)[1];
+  }
+
+  const makeMeme = (urls, webText, myText) => {
+    let newUrls = urls.replace(webText, myText);
+    return newUrls;
+  };
+
+  const onSubmit = (data) => {
+    setNewMemeText(data.myMeme);
+
+    if (newMemeText !== '') {
+      makeMeme(
+        props.posts[props.arrayPosition],
+        extractMemeText(props.posts[props.arrayPosition]),
+        newMemeText,
+      );
+    }
+    console.log(
+      makeMeme(
+        props.posts[props.arrayPosition],
+        extractMemeText(props.posts[props.arrayPosition]),
+        newMemeText,
+      ),
+    );
+  };
 
   const flexbox = {
     display: 'flex',
@@ -19,33 +50,22 @@ export default function MemeTextForm() {
     margin: '8px',
   };
 
-  function extractMemeText(meme) {
-    const memeTextArray = [];
-    let re = /\/[a-z]+\/([a-z_~',!]+\/[a-z_~',!]+)\.jpg/;
-    //Takes information from URL needed to change the meme's text
-    for (let i = 0; i < meme.length; i++) {
-      memeTextArray.push(meme[i].match(re)[1]);
-    }
-    return memeTextArray;
-  }
-
-  const makeMeme = (urls, webText, myText) => {
-    const newUrls = [];
-    for (let i = 0; i < webText.length; i++) {
-      newUrls.push(urls[i].replace(webText[i], myText[i]));
-    }
-    return newUrls;
-  };
-
   return (
     <div>
       <form>
         <div style={flexbox}>
           <label style={labelStyle}>Enter Your Custom Text Below</label>
-          <div>
-            <input style={input} placeholder="Top Text"></input>
-            <input style={input} placeholder="Bottom Text"></input>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <input
+                style={input}
+                placeholder="Enter Your Meme Text"
+                ref={register}
+                name="myMeme"
+              ></input>
+              <button>Submit</button>
+            </div>
+          </form>
         </div>
       </form>
     </div>

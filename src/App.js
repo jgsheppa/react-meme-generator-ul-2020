@@ -14,7 +14,6 @@ function App() {
       .get('https://memegen.link/examples')
       .then((res) => {
         setPosts(parseHTML(res.data));
-        console.log(parseHTML(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +47,10 @@ function App() {
   return (
     <div>
       <div style={flexbox}>
-        <MemeInputForm></MemeInputForm>
+        <MemeInputForm
+          posts={posts}
+          arrayPosition={arrayPosition}
+        ></MemeInputForm>
         <FetchData
           handleRightClick={handleRightClick}
           handleLeftClick={handleLeftClick}
