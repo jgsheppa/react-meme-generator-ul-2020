@@ -1,31 +1,16 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { makeMeme, extractMemeText } from './MemeInputFormHelper';
 
 export default function MemeTextForm(props) {
   const [newMemeText, setNewMemeText] = useState('');
-  const { register, handleSubmit, errors } = useForm();
-
-  function extractMemeText(meme) {
-    let re = /\/[a-z]+\/([a-z_~',!]+\/[a-z_~',!]+)\.jpg/;
-    return meme.match(re)[1];
-  }
-
-  const makeMeme = (urls, webText, myText) => {
-    let newUrls = urls.replace(webText, myText);
-    return newUrls;
-  };
 
   const onSubmit = (data) => {
-    setNewMemeText(data.myMeme);
+    setNewMemeText(`
+      ${data.myMeme.split(' ').join('_')}/${data.myMeme2
+      .split(' ')
+      .join('_')}`);
 
-    if (newMemeText !== '') {
-      makeMeme(
-        props.posts[props.arrayPosition],
-        extractMemeText(props.posts[props.arrayPosition]),
-        newMemeText,
-      );
-    }
-    console.log(
+    props.setURL(
       makeMeme(
         props.posts[props.arrayPosition],
         extractMemeText(props.posts[props.arrayPosition]),
@@ -42,6 +27,7 @@ export default function MemeTextForm(props) {
 
   const labelStyle = {
     font: 'sans serif',
+    fontWeight: 'bold',
     padding: '1em',
   };
 
@@ -55,13 +41,19 @@ export default function MemeTextForm(props) {
       <form>
         <div style={flexbox}>
           <label style={labelStyle}>Enter Your Custom Text Below</label>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={props.handleSubmit(onSubmit)}>
             <div>
               <input
                 style={input}
                 placeholder="Enter Your Meme Text"
-                ref={register}
+                ref={props.register}
                 name="myMeme"
+              ></input>
+              <input
+                style={input}
+                placeholder="Enter Your Meme Text"
+                ref={props.register}
+                name="myMeme2"
               ></input>
               <button>Submit</button>
             </div>

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import parseHTML from './components/fetchData/Helper';
-import FetchData from './components/fetchData/FetchData';
+import parseHTML from './components/fetchData/FetchDataHelper';
+import CreateImageGallery from './components/fetchData/CreateImageGallery';
 import MemeInputForm from './components/memeInputForm/MemeInputForm';
 import DownloadButton from './components/downloadButton/DownloadButton';
+import { useForm } from 'react-hook-form';
 
 function App() {
   const [posts, setPosts] = useState('');
   const [arrayPosition, setArrayPosition] = useState(0);
+  const [url, setURL] = useState('');
+  const { register, handleSubmit } = useForm();
+
+  console.log(typeof url);
 
   useEffect(() => {
     axios
@@ -38,6 +43,7 @@ function App() {
       setArrayPosition(arrayPosition - 1);
     }
   };
+
   const flexbox = {
     display: 'flex',
     flexDirection: 'column',
@@ -48,16 +54,23 @@ function App() {
     <div>
       <div style={flexbox}>
         <MemeInputForm
+          register={register}
+          handleSubmit={handleSubmit}
           posts={posts}
           arrayPosition={arrayPosition}
+          setPosts={setPosts}
+          url={url}
+          setURL={setURL}
         ></MemeInputForm>
-        <FetchData
+        <CreateImageGallery
           handleRightClick={handleRightClick}
           handleLeftClick={handleLeftClick}
           posts={posts}
           arrayPosition={arrayPosition}
+          url={url}
+          setURL={setURL}
         />
-        <DownloadButton></DownloadButton>
+        <DownloadButton url={url} setURL={setURL} />
       </div>
     </div>
   );
