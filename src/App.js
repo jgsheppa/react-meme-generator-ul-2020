@@ -4,13 +4,10 @@ import parseHTML from './components/fetchData/FetchDataHelper';
 import CreateImageGallery from './components/fetchData/CreateImageGallery';
 import MemeInputForm from './components/memeInputForm/MemeInputForm';
 import DownloadButton from './components/downloadButton/DownloadButton';
-import { useForm } from 'react-hook-form';
 
 function App() {
   const [posts, setPosts] = useState('');
   const [arrayPosition, setArrayPosition] = useState(0);
-  const { register, handleSubmit } = useForm();
-  const [newMemeText, setNewMemeText] = useState('');
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
   const [memeName, setMemeName] = useState('/tenguy/');
@@ -61,15 +58,6 @@ function App() {
           bottomText={bottomText}
           setTopText={setTopText}
           topText={topText}
-          setNewMemeText={setNewMemeText}
-          newMemeText={newMemeText}
-          register={register}
-          handleSubmit={handleSubmit}
-          posts={posts}
-          arrayPosition={arrayPosition}
-          setPosts={setPosts}
-          setMemeName={setMemeName}
-          memeURL={memeURL}
         ></MemeInputForm>
         <CreateImageGallery
           handleRightClick={handleRightClick}
@@ -78,16 +66,9 @@ function App() {
           arrayPosition={arrayPosition}
           setPosts={setPosts}
           setMemeName={setMemeName}
-          memeName={memeName}
           memeURL={memeURL}
         />
-        <DownloadButton
-          setBottomText={setBottomText}
-          bottomText={bottomText}
-          setTopText={setTopText}
-          topText={topText}
-          memeURL={memeURL}
-        />
+        <DownloadButton memeURL={memeURL} />
       </div>
     </div>
   );
