@@ -49,9 +49,13 @@ function App() {
     alignItems: 'center',
   };
 
+  const div = {
+    background: '#F5A99D',
+  };
+
   console.log(memeURL);
   return (
-    <div>
+    <div style={div}>
       <div style={flexbox}>
         <MemeInputForm
           setBottomText={setBottomText}
