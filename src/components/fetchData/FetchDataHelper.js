@@ -22,17 +22,3 @@ export function extractMemeNames(meme) {
   }
   return memeIDArray;
 }
-
-// const concatURLs = (array) => {
-//   const urlArray = [];
-//   const baseUrl = 'https://api.memegen.link/images';
-//   for (let i = 0; i < array.length; i++) {
-//     urlArray.push(baseUrl + array[i].toString());
-//   }
-//   return urlArray;
-// };
-
-// export function replaceMemeName(url, webText, myText) {
-//   let newUrl = url.replace(webText, myText);
-//   return newUrl;
-// }
