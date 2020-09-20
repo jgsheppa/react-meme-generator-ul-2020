@@ -26,11 +26,9 @@ export default function DownloadButton(props) {
 
   return (
     <div>
-      <a>
-        <button style={downloadButtonStyle} onClick={download}>
-          Download
-        </button>
-      </a>
+      <button style={downloadButtonStyle} onClick={download}>
+        Download
+      </button>
     </div>
   );
 }
