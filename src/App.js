@@ -14,14 +14,13 @@ function App() {
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
   const [memeName, setMemeName] = useState('/tenguy/');
-  let memeURL = `https://api.memegen.link/images/tenguy/${topText}/${bottomText}.jpg?preview=true&watermark=none`;
+  let memeURL = `https://api.memegen.link/images${memeName}${topText}/${bottomText}.jpg?preview=true&watermark=none`;
 
   useEffect(() => {
     axios
       .get('https://memegen.link/examples')
       .then((res) => {
         setPosts(parseHTML(res.data));
-        setMemeName(posts[arrayPosition]);
       })
       .catch((err) => {
         console.log(err);

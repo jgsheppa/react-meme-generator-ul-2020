@@ -2,7 +2,7 @@ import React from 'react';
 import './FetchData.css';
 
 export default function CreateImageGallery(props) {
-  console.log(props.memeURL);
+  props.setMemeName(props.posts[props.arrayPosition]);
   return (
     <div>
       <div className="flexbox">
