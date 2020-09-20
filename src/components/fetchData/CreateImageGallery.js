@@ -1,7 +1,8 @@
 import React from 'react';
 import './FetchData.css';
 
-export default function FetchData(props) {
+export default function CreateImageGallery(props) {
+  console.log(props.memeURL);
   return (
     <div>
       <div className="flexbox">
@@ -9,7 +10,7 @@ export default function FetchData(props) {
           <span className="arrow left"></span>
         </button>
         <div className="meme">
-          <img src={props.posts[props.arrayPosition]} alt="This is a meme" />
+          <img src={props.memeURL} alt="This is a meme" />
         </div>
         <button className="button" onClick={props.handleRightClick}>
           <span className="arrow right"></span>

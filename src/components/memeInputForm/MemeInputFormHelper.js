@@ -1,5 +1,5 @@
 export function extractMemeText(meme) {
-  let re = /\/[a-z]+\/([a-z_~',!]+\/[a-z_~',!]+)\.jpg/;
+  let re = /(\/[a-z]+\/)[a-z_~',!]+\/[a-z_~',!]+\.jpg/;
   return meme.match(re)[1];
 }
 

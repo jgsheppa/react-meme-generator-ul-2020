@@ -1,28 +1,21 @@
 import React from 'react';
+import axios from 'axios';
 
 export default function DownloadButton(props) {
-  console.log(props.url);
-  const download = (e) => {
-    console.log(e.target.href);
-    fetch(e.target.href, {
+  function download() {
+    axios({
+      url: props.memeURL,
       method: 'GET',
-      headers: {},
-    })
-      .then((response) => {
-        response.arrayBuffer().then(function (buffer) {
-          const url = window.URL.createObjectURL(new Blob([{ buffer }]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'image.jpg'); //or any other extension
-          document.body.appendChild(link);
-          link.click();
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+      responseType: 'blob',
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'image.jpg');
+      document.body.appendChild(link);
+      link.click();
+    });
+  }
   const downloadButtonStyle = {
     fontSize: '20px',
     fontColor: 'black',
@@ -34,12 +27,7 @@ export default function DownloadButton(props) {
   return (
     <div>
       <a>
-        <button
-          onClick={(e) => download(e)}
-          style={downloadButtonStyle}
-          href={props.url}
-          download
-        >
+        <button style={downloadButtonStyle} onClick={download}>
           Download
         </button>
       </a>
