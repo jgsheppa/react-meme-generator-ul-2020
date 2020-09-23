@@ -49,31 +49,25 @@ function App() {
     alignItems: 'center',
   };
 
-  const div = {
-    background: '#F5A99D',
-  };
-
   console.log(memeURL);
   return (
-    <div style={div}>
-      <div style={flexbox}>
-        <MemeInputForm
-          setBottomText={setBottomText}
-          bottomText={bottomText}
-          setTopText={setTopText}
-          topText={topText}
-        ></MemeInputForm>
-        <CreateImageGallery
-          handleRightClick={handleRightClick}
-          handleLeftClick={handleLeftClick}
-          posts={posts}
-          arrayPosition={arrayPosition}
-          setPosts={setPosts}
-          setMemeName={setMemeName}
-          memeURL={memeURL}
-        />
-        <DownloadButton memeURL={memeURL} />
-      </div>
+    <div style={flexbox}>
+      <MemeInputForm
+        setBottomText={setBottomText}
+        bottomText={bottomText}
+        setTopText={setTopText}
+        topText={topText}
+      ></MemeInputForm>
+      <CreateImageGallery
+        handleRightClick={handleRightClick}
+        handleLeftClick={handleLeftClick}
+        posts={posts}
+        arrayPosition={arrayPosition}
+        setPosts={setPosts}
+        setMemeName={setMemeName}
+        memeURL={memeURL}
+      />
+      <DownloadButton memeURL={memeURL} />
     </div>
   );
 }
