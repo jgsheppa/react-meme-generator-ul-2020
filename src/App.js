@@ -6,7 +6,7 @@ import MemeInputForm from './components/memeInputForm/MemeInputForm';
 import DownloadButton from './components/downloadButton/DownloadButton';
 
 function App() {
-  const [posts, setPosts] = useState('');
+  const [posts, setPosts] = useState([]);
   const [arrayPosition, setArrayPosition] = useState(0);
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
@@ -18,13 +18,14 @@ function App() {
       .get('https://memegen.link/examples')
       .then((res) => {
         setPosts(parseHTML(res.data));
+        console.log(typeof posts);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const handleRightClick = () => {
+  const handleRightArrow = () => {
     if (
       posts[arrayPosition + 1] === posts.length ||
       arrayPosition === posts.length - 1
@@ -35,7 +36,7 @@ function App() {
     }
   };
 
-  const handleLeftClick = () => {
+  const handleLeftArrow = () => {
     if (arrayPosition === 0) {
       setArrayPosition(posts.length - 1);
     } else {
@@ -59,8 +60,8 @@ function App() {
         topText={topText}
       ></MemeInputForm>
       <CreateImageGallery
-        handleRightClick={handleRightClick}
-        handleLeftClick={handleLeftClick}
+        handleRightArrow={handleRightArrow}
+        handleLeftArrow={handleLeftArrow}
         posts={posts}
         arrayPosition={arrayPosition}
         setPosts={setPosts}
