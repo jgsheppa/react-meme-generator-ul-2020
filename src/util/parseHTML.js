@@ -15,8 +15,8 @@ const createMemeNameArray = (meme) => {
 };
 
 function extractMemeNames(meme) {
-  let memeIDArray = [];
-  let re = /\/([a-z,-]+)\/[a-z_~',!]+/;
+  const memeIDArray = [];
+  const re = /\/([a-z,-]+)\/[a-z_~',!]+/;
   for (let i = 0; i < meme.length; i++) {
     memeIDArray.push(meme[i].match(re)[1]);
     console.log(meme[i]);

@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import parseHTML from './components/fetchData/FetchDataHelper';
-import CreateImageGallery from './components/fetchData/CreateImageGallery';
-import MemeInputForm from './components/memeInputForm/MemeInputForm';
-import DownloadButton from './components/downloadButton/DownloadButton';
+import parseHTML from './util/parseHTML';
+import CreateImageGallery from './components/CreateImageGallery';
+import MemeInputForm from './components/MemeInputForm';
+import DownloadButton from './components/DownloadButton';
+
+const flexbox = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [arrayPosition, setArrayPosition] = useState(0);
   const [topText, setTopText] = useState('');
   const [bottomText, setBottomText] = useState('');
-  const [memeName, setMemeName] = useState('/tenguy/');
-  let memeURL = `https://api.memegen.link/images/${memeName}/${topText}/${bottomText}.jpg?preview=true&watermark=none`;
+  const [memeName, setMemeName] = useState('tenguy');
+  const memeURL = `https://api.memegen.link/images/${memeName}/${topText}/${bottomText}.jpg?preview=true&watermark=none`;
+
+  console.log(memeName);
 
   useEffect(() => {
     axios
@@ -26,31 +34,21 @@ function App() {
   }, []);
 
   const handleRightArrow = () => {
-    if (
-      posts[arrayPosition + 1] === posts.length ||
-      arrayPosition === posts.length - 1
-    ) {
-      setArrayPosition(0);
-    } else {
-      setArrayPosition(arrayPosition + 1);
-    }
+    posts[arrayPosition + 1] === posts.length ||
+    arrayPosition === posts.length - 1
+      ? setArrayPosition(0)
+      : setArrayPosition(arrayPosition + 1);
   };
 
   const handleLeftArrow = () => {
-    if (arrayPosition === 0) {
-      setArrayPosition(posts.length - 1);
-    } else {
-      setArrayPosition(arrayPosition - 1);
-    }
+    arrayPosition === 0
+      ? setArrayPosition(posts.length - 1)
+      : setArrayPosition(arrayPosition - 1);
   };
 
-  const flexbox = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  };
-
-  console.log(memeURL);
+  // if (!memeName) {
+  //   return <h3>Loading...</h3>;
+  // }
   return (
     <div style={flexbox}>
       <MemeInputForm
@@ -58,7 +56,7 @@ function App() {
         bottomText={bottomText}
         setTopText={setTopText}
         topText={topText}
-      ></MemeInputForm>
+      />
       <CreateImageGallery
         handleRightArrow={handleRightArrow}
         handleLeftArrow={handleLeftArrow}

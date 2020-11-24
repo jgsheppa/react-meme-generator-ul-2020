@@ -1,23 +1,23 @@
 import React from 'react';
 
+const flexbox = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
+const labelStyle = {
+  font: 'sans serif',
+  fontWeight: 'bold',
+  padding: '1em',
+};
+
+const input = {
+  padding: '0.5em',
+  margin: '8px',
+};
+
 export default function MemeTextForm(props) {
-  const flexbox = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  };
-
-  const labelStyle = {
-    font: 'sans serif',
-    fontWeight: 'bold',
-    padding: '1em',
-  };
-
-  const input = {
-    padding: '0.5em',
-    margin: '8px',
-  };
-
   function handleTopChange(e) {
     props.setTopText(e.target.value);
   }
@@ -34,13 +34,13 @@ export default function MemeTextForm(props) {
             style={input}
             value={props.topText}
             onChange={handleTopChange}
-          ></input>
+          />
           <input
             value={props.bottomText}
             style={input}
             onChange={handleBottomChange}
             // placeholder="Enter Your Meme Text"
-          ></input>
+          />
         </div>
       </div>
     </div>

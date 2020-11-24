@@ -1,13 +1,13 @@
 import React from 'react';
 import './FetchData.css';
 
+const imgStyles = {
+  maxWidth: '800px',
+  maxHeight: '800px',
+};
+
 export default function CreateImageGallery(props) {
   props.setMemeName(props.posts[props.arrayPosition]);
-
-  const imgStyles = {
-    maxWidth: '800px',
-    maxHeight: '800px',
-  };
 
   return (
     <div>

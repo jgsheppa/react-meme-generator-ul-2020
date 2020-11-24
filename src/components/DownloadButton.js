@@ -1,6 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 
+const downloadButtonStyle = {
+  fontSize: '20px',
+  fontColor: 'black',
+  borderRadius: '8px',
+  backgroundColor: 'rgb(134, 166, 175)',
+  padding: '1em',
+};
+
 export default function DownloadButton(props) {
   function download() {
     axios({
@@ -16,13 +24,6 @@ export default function DownloadButton(props) {
       link.click();
     });
   }
-  const downloadButtonStyle = {
-    fontSize: '20px',
-    fontColor: 'black',
-    borderRadius: '8px',
-    backgroundColor: 'rgb(134, 166, 175)',
-    padding: '1em',
-  };
 
   return (
     <div>
